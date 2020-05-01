@@ -63,5 +63,7 @@
   "NOTE_NOT_FOUND": "Note not found",
   "PRODUCT_DATA_NOT_PROVIDED": "Product data not received",
   "PRODUCT_ID_NOT_PROVIDED": "Product ID not received",
-  "PRODUCT_NOT_FOUND": "Product not found"					
+  "PRODUCT_NOT_FOUND": "Product not found",
+  "PRODUCT_TITLE_LENGTH_25_80": "Title should have between 25 and 80 characters",
+  "PRODUCT_TITLE_REQUIRED": "Title is required"					
 }

@@ -1,7 +1,11 @@
 import * as mongoose from 'mongoose';
 import toJsonHelper from '../helpers/mongoose/toJsonHelper';
+import * as validators from '../helpers/mongoose/validators';
 import { normalizedValidator } from '../helpers/mongoose/normalizedValidator';
 import * as timestamps from 'mongoose-timestamp';
+import {
+	PRODUCT_TITLE_LENGTH_25_80,
+} from '../constants';
 import {NoteDefinition, NoteModelSchema} from './Note';
 
 export interface ProductDefinition extends mongoose.Schema {
@@ -9,7 +13,7 @@ export interface ProductDefinition extends mongoose.Schema {
   id?: string;
   createdAt?: Date;
   updatedAt?: Date;
-  title?: string;
+  title: string;
   price?: string;
   notes?: NoteDefinition[];
 }
@@ -21,7 +25,13 @@ export const ProductModelSchema: mongoose.Schema = new mongoose.Schema({
 	},
 	title: {
 		type: String,
-		required: false,
+		required: true,
+		validate: [
+			{
+				validator: validators.length(25, 80),
+				msg: PRODUCT_TITLE_LENGTH_25_80,
+			},
+		],
 	},
 	price: {
 		type: String,
