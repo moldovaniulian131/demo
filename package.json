@@ -58,7 +58,13 @@
 	},
 	"scripts": {
    "lint": "eslint . -c ./config/eslint/.eslintrc --ignore-path ./config/eslint/.eslintignore --ext .js,.ts --fix",
-   "lint:fix": "eslint . -c ./config/eslint/.eslintrc --ignore-path ./config/eslint/.eslintignore --ext .js,.ts --fix"
+   "lint:fix": "eslint . -c ./config/eslint/.eslintrc --ignore-path ./config/eslint/.eslintignore --ext .js,.ts --fix",
+   "local:clear": "docker-compose -f environments/local/services/docker-compose.yml down",
+   "local:mongoDatabase:migrate": "npm run local:mongoDatabase:run-migrations && npm run local:mongoDatabase:run-seeds",
+   "local:mongoDatabase:run-migrations": "STAGE=local DB_IDENTIFIER=MONGO_DATABASE migrate-mongo up -f config/mongodb/mongoDatabaseMigrate.js",
+   "local:mongoDatabase:run-seeds": "STAGE=local DB_IDENTIFIER=MONGO_DATABASE migrate-mongo up -f config/mongodb/mongoDatabaseSeed.js",
+   "local:serverless:start": "serverless offline --stage local --host 0.0.0.0",
+   "local:start": "docker-compose -f environments/local/services/docker-compose.yml up --build"
 	},
 	"babel": {
 		"presets": [
